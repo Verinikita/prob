@@ -1,0 +1,8 @@
+{
+  "routes": [
+    { "src": "/uploads/(.*)", "dest": "/uploads/$1" },
+    { "src": "/archivos_json/(.*)", "dest": "/archivos_json/$1" },
+    { "src": "/archivos_pdb/(.*)", "dest": "/archivos_pdb/$1" },
+    { "src": "/(.*)", "dest": "/app.py" }
+  ]
+}
