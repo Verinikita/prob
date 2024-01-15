@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload/Download Example</title>
+</head>
+<body>
+
+    <h1>File Upload/Download Example</h1>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <label for="file">Seleccionar archivo ZIP:</label>
+        <input type="file" name="file" id="file" accept=".zip" required>
+        <button type="submit">Cargar</button>
+    </form>
+
+    <br>
+
+    <h2>Descargar archivos:</h2>
+    <ul>
+        <!-- Reemplaza 'nombre_archivo.zip' con el nombre real del archivo que cargaste -->
+        <li><a href="/download/nombre_archivo.zip" download>Descargar Archivo</a></li>
+    </ul>
+
+</body>
+</html>
