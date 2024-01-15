@@ -1,26 +1,24 @@
-from flask import Flask, request, flash, redirect, url_for
+from flask import Flask, render_template, request, send_from_directory
 from werkzeug.utils import secure_filename
 import os
+from flask import Flask, render_template
 
+app = Flask(__name__, static_folder='static', template_folder='templates')
+
+
+
+UPLOAD_FOLDER = 'uploads'
+DOWNLOAD_FOLDER = 'downl'
 ALLOWED_EXTENSIONS = {'zip'}
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-def uploader(request):
-    if 'zipFile' not in request.files:
-        flash('No se ha proporcionado ningún archivo')
-        return 'Error: No se ha proporcionado ningún archivo'
-
-    file = request.files['zipFile']
-
-    if file.filename == '':
-        flash('No se ha seleccionado ningún archivo')
-        return 'Error: No se ha seleccionado ningún archivo'
-
-    if file and allowed_file(file.filename):
-        filename = secure_filename(file.filename)
-        file.save(os.path.join('./PAGINA/scTCR/PAGINA/downlo', filename))
+@app.route('/')
+def index():
         flash('Archivo subido exitosamente')
         return 'Archivo subido exitosamente'
 
