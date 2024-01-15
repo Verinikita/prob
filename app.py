@@ -7,7 +7,10 @@ app = Flask(__name__)
 UPLOAD_FOLDER = 'uploads'
 JSON_FOLDER = 'archivos_json'
 PDB_FOLDER = 'archivos_pdb'
-
+# Asegúrate de que las carpetas existan o créalas automáticamente
+for folder in [UPLOAD_FOLDER, JSON_FOLDER, PDB_FOLDER]:
+    if not os.path.exists(folder):
+        os.makedirs(folder)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 def aplicar_funcion(zip_path):
