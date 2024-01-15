@@ -1,26 +1,62 @@
 from flask import Flask, render_template, request, send_from_directory
-from werkzeug.utils import secure_filename
 import os
-from flask import Flask, render_template
+from zipfile import ZipFile
 
-app = Flask(__name__, static_folder='static', template_folder='templates')
-
-
+app = Flask(__name__)
 
 UPLOAD_FOLDER = 'uploads'
-DOWNLOAD_FOLDER = 'downl'
-ALLOWED_EXTENSIONS = {'zip'}
+JSON_FOLDER = 'archivos_json'
+PDB_FOLDER = 'archivos_pdb'
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-app.config['DOWNLOAD_FOLDER'] = DOWNLOAD_FOLDER
 
-def allowed_file(filename):
-    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+def aplicar_funcion(zip_path):
+    # Tu lógica para aplicar la función a los archivos ZIP
+    # Aquí estoy simulando la extracción de archivos json y pdb
+    with ZipFile(zip_path, 'r') as fz:
+        for zip_info in fz.infolist():
+            if zip_info.filename.endswith(".json"):
+                zip_info.filename = os.path.basename(zip_info.filename)
+                fz.extract(zip_info, JSON_FOLDER)
+            elif zip_info.filename.endswith(".pdb"):
+                zip_info.filename = os.path.basename(zip_info.filename)
+                fz.extract(zip_info, PDB_FOLDER)
 
 @app.route('/')
 def index():
-        flash('Archivo subido exitosamente')
-        return 'Archivo subido exitosamente'
+    return render_template('index.html')
 
-    flash('El tipo de archivo no está permitido')
-    return 'Error: El tipo de archivo no está permitido'
+@app.route('/process', methods=['POST'])
+def process():
+    if 'file' not in request.files:
+        return 'Error: No se ha proporcionado ningún archivo'
+
+    file = request.files['file']
+
+    if file.filename == '':
+        return 'Error: No se ha seleccionado ningún archivo'
+
+    if file and file.filename.endswith(".zip"):
+        zip_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+        file.save(zip_path)
+        aplicar_funcion(zip_path)
+        return 'Función aplicada con éxito'
+
+    return 'Error: El archivo debe tener extensión .zip'
+
+@app.route('/download/<folder_name>')
+def download_folder(folder_name):
+    zip_filename = f"{folder_name}.zip"
+    zip_path = os.path.join(app.config['UPLOAD_FOLDER'], zip_filename)
+
+    with ZipFile(zip_path, 'w') as zipf:
+        folder_path = os.path.join(app.config['UPLOAD_FOLDER'], folder_name)
+        for root, _, files in os.walk(folder_path):
+            for file in files:
+                file_path = os.path.join(root, file)
+                zipf.write(file_path, os.path.relpath(file_path, folder_path))
+
+    return send_from_directory(app.config['UPLOAD_FOLDER'], zip_filename, as_attachment=True)
+
+if __name__ == '__main__':
+    app.run(debug=True)
