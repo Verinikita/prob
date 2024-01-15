@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>File Upload/Download Example</title>
+    <title>File Upload/Function/Download Example</title>
 </head>
 <body>
 
-    <h1>File Upload/Download Example</h1>
+    <h1>File Upload/Function/Download Example</h1>
 
-    <form action="/upload" method="post" enctype="multipart/form-data">
+    <form action="/process" method="post" enctype="multipart/form-data">
         <label for="file">Seleccionar archivo ZIP:</label>
         <input type="file" name="file" id="file" accept=".zip" required>
-        <button type="submit">Cargar</button>
+        <button type="submit">Cargar y Aplicar Función</button>
     </form>
 
     <br>
 
-    <h2>Descargar archivos:</h2>
+    <h2>Descargar archivos generados:</h2>
     <ul>
-        <!-- Reemplaza 'nombre_archivo.zip' con el nombre real del archivo que cargaste -->
-        <li><a href="/download/nombre_archivo.zip" download>Descargar Archivo</a></li>
+        <li><a href="/download/archivos_json.zip" download>Descargar Archivos JSON</a></li>
+        <li><a href="/download/archivos_pdb.zip" download>Descargar Archivos PDB</a></li>
     </ul>
 
 </body>
