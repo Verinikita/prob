@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const xhr = new XMLHttpRequest();
 
             // Configura la solicitud AJAX
-            xhr.open('POST', '/upload', true);
+            xhr.open('POST', 'https://github.com/Verinikita/prob/tree/main/downlo', true);
 
             // Define la función de manejo de la carga exitosa
             xhr.onload = function () {
