@@ -41,10 +41,9 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('No se ha seleccionado ningún archivo');
         }
     });
-});
+
 
             // Envía la solicitud AJAX con los datos del formulario
             xhr.send(formData);
         
-    });
 });
