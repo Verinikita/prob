@@ -43,7 +43,3 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
 
-            // Envía la solicitud AJAX con los datos del formulario
-            xhr.send(formData);
-        
-});
