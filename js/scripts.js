@@ -14,23 +14,34 @@ document.addEventListener('DOMContentLoaded', function () {
             const xhr = new XMLHttpRequest();
 
             // Configura la solicitud AJAX con la ruta correcta de tu servidor Flask
-            xhr.open('POST', 'https://prob-virid.vercel.app/upload', true)
+            xhr.open('POST', 'https://prob-virid.vercel.app/upload', true);
 
             // Define la función de manejo de la carga exitosa
             xhr.onload = function () {
                 if (xhr.status === 200) {
                     // Maneja la respuesta del servidor si es necesario
-                    console.log(xhr.responseText);
+                    console.log('Éxito:', xhr.responseText);
                     // Cierra el modal después de cargar y aplicar
                     $('#myModal').modal('hide');
+                } else {
+                    // Muestra mensajes de error en la consola si la solicitud no es exitosa
+                    console.error('Error en la solicitud AJAX. Código de estado:', xhr.status);
                 }
             };
 
-            // Define la función de manejo de errores
+            // Define la función de manejo de errores de red
             xhr.onerror = function () {
-                // Maneja errores de la solicitud AJAX
-                console.error('Error en la solicitud AJAX');
+                console.error('Error de red al intentar realizar la solicitud AJAX');
             };
+
+            // Envía la solicitud AJAX con los datos del formulario
+            xhr.send(formData);
+        } else {
+            // Muestra un mensaje si no se seleccionó ningún archivo
+            console.error('No se ha seleccionado ningún archivo');
+        }
+    });
+});
 
             // Envía la solicitud AJAX con los datos del formulario
             xhr.send(formData);
