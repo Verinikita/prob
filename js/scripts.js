@@ -20,7 +20,9 @@ document.addEventListener('DOMContentLoaded', function () {
             xhr.onload = function () {
                 if (xhr.status === 200) {
                     // Maneja la respuesta del servidor si es necesario
-                    console.log('Éxito:', xhr.responseText);
+                    const response = JSON.parse(xhr.responseText);
+                    console.log(response);
+            
                     // Cierra el modal después de cargar y aplicar
                     $('#myModal').modal('hide');
                 } else {
@@ -41,5 +43,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('No se ha seleccionado ningún archivo');
         }
     });
+ });
 
 
