@@ -1,7 +1,7 @@
 {
   "routes": [
     { "src": "/upload", "dest": "/app.py" },
-    { "src": "/uploads/(.*)", "dest": "/uploads/$1" },
+    { "src": "/uploads/(.*)", "dest": "/upload/$1" },
     { "src": "/archivos_json/(.*)", "dest": "/archivos_json/$1" },
     { "src": "/archivos_pdb/(.*)", "dest": "/archivos_pdb/$1" }
   ]
