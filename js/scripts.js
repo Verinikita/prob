@@ -1,9 +1,3 @@
-/*!
-* Start Bootstrap - Business Casual v7.0.9 (https://startbootstrap.com/theme/business-casual)
-* Copyright 2013-2023 Start Bootstrap
-* Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-business-casual/blob/master/LICENSE)
-*/
-// Highlights current date on contact page
 document.addEventListener('DOMContentLoaded', function () {
     // Agrega un evento clic al botón "Upload & Apply"
     document.getElementById('uploadAndApplyButton').addEventListener('click', function () {
@@ -19,8 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
             // Crea una instancia de XMLHttpRequest
             const xhr = new XMLHttpRequest();
 
-            // Configura la solicitud AJAX
-            xhr.open('POST', 'https://github.com/Verinikita/prob/tree/main/downlo', true);
+            // Configura la solicitud AJAX con la ruta correcta de tu servidor Flask
+            xhr.open('POST', '/upload', true);
 
             // Define la función de manejo de la carga exitosa
             xhr.onload = function () {
