@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const xhr = new XMLHttpRequest();
 
             // Configura la solicitud AJAX con la ruta correcta de tu servidor Flask
-            xhr.open('POST', '/upload', true);
+            xhr.open('POST', 'https://prob-virid.vercel.app/upload', true)
 
             // Define la función de manejo de la carga exitosa
             xhr.onload = function () {
